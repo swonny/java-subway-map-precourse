@@ -1,19 +1,22 @@
 package subway.domain;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 public class SectionRepository {
     private static LinkedHashMap<Line, List<Station>> totalSubway = new LinkedHashMap<>();
 
-    public static void addNewLine(Line newLine, Station up, Station down) {
+    public static void addNewLine(Line newLine, Station upStation, Station downStation) {
         // TODO : 중복 없으면 유효성 검사 추가
-        totalSubway.put(newLine, List.of(up, down));
+        totalSubway.put(newLine, new ArrayList<>());
+    }
+
+    public static void initializeSections(Line line, List<Station> stations) {
+        totalSubway.put(line, stations);
     }
 
     public static void addStationToSection(Line line, Station station, int order) {
         List<Station> stations = totalSubway.get(line);
-        stations.add(order + 1, station);
+        stations.add(order, station);
         totalSubway.put(line, stations);
     }
 

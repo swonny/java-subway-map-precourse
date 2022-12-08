@@ -32,4 +32,5 @@ public class StationRepository {
     public static boolean has(String name) {
         return stations().contains(name);
     }
+
 }
