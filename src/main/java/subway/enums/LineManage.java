@@ -27,13 +27,17 @@ public enum LineManage {
     public static String getWholeMenu() {
         StringBuilder stringBuilder = new StringBuilder();
         for (LineManage menu : LineManage.values()) {
-            stringBuilder.append(menu.get() + "\n");
+            stringBuilder.append(menu.getPrinting() + "\n");
         }
         return stringBuilder.toString();
     }
 
-    public String get() {
+    private String getPrinting() {
         return this.printing;
+    }
+
+    public String get() {
+        return this.userSelection;
     }
 
     public List<String> getFollowingMessages() {

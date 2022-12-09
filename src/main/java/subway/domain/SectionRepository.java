@@ -5,9 +5,19 @@ import java.util.*;
 public class SectionRepository {
     private static LinkedHashMap<Line, List<Station>> totalSubway = new LinkedHashMap<>();
 
+    public static LinkedHashMap<Line, List<Station>> sections() {
+        return totalSubway;
+    }
+
     public static void addNewLine(Line newLine, Station upStation, Station downStation) {
         // TODO : 중복 없으면 유효성 검사 추가
-        totalSubway.put(newLine, new ArrayList<>());
+        if (!StationRepository.has(upStation.getName())) {
+            StationRepository.addStation(upStation);
+        }
+        if (!StationRepository.has(downStation.getName())) {
+            StationRepository.addStation(downStation);
+        }
+        totalSubway.put(newLine, List.of(upStation, downStation));
     }
 
     public static void initializeSections(Line line, List<Station> stations) {

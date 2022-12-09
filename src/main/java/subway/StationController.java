@@ -26,9 +26,25 @@ public class StationController {
         }
     }
 
+    public static Station getStation(String name) {
+        System.out.println(StationRepository.has(name) + " test" + name);
+        if (StationRepository.has(name)) {
+            return StationRepository.get(name);
+        }
+        return StationMaker.make(name);
+    }
+
+    private static void addStation() {
+        List<String> followingMessages = StationManage.FIRST.getFollowingMessages();
+        OutputView.print(followingMessages.get(0));
+        StationRepository.addStation(StationMaker.make(InputView.read()));
+        StationManage.FIRST.printInfo();
+    }
+
     private static void printStations() {
         StationRepository.stations().stream()
-                .forEach(StationManage.SECOND::printInfo);
+                .map(station -> "[INFO] " + station.getName())
+                .forEach(OutputView::print);
     }
 
     private static void deleteStation() {
@@ -38,10 +54,4 @@ public class StationController {
         StationManage.SECOND.printInfo();
     }
 
-    private static void addStation() {
-        List<String> followingMessages = StationManage.FIRST.getFollowingMessages();
-        OutputView.print(followingMessages.get(0));
-        StationMaker.make(InputView.read());
-        StationManage.FIRST.printInfo();
-    }
 }

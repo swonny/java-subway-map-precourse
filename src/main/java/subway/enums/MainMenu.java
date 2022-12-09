@@ -5,7 +5,7 @@ public enum MainMenu {
     SECOND("2. 노선 관리", "2"),
     THIRD("3. 구간 관리", "3"),
     FOURTH("4. 지하철 노선도 출력", "4"),
-    QUIT("Q. 종료", "5");
+    QUIT("Q. 종료", "Q");
 
     private String menu;
     private String input;

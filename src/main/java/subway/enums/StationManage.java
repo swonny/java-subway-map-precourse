@@ -24,7 +24,7 @@ public enum StationManage {
             OutputView.print("[INFO] 지하철 역이 삭제되었습니다.");
         }
     },
-    BACK("돌아가기", List.of(), "B") {
+    BACK("B. 돌아가기", List.of(), "B") {
         public void printInfo(String...value) {
             OutputView.print("[INFO] 이전 메뉴로 돌아갑니다.");
         }
@@ -44,13 +44,17 @@ public enum StationManage {
     public static String getWholeMenu() {
         StringBuilder stringBuilder = new StringBuilder();
         for (StationManage menu : StationManage.values()) {
-            stringBuilder.append(menu.get() + "\n");
+            stringBuilder.append(menu.getPrinting() + "\n");
         }
         return stringBuilder.toString();
     }
 
-    public String get() {
+    private String getPrinting() {
         return this.printing;
+    }
+
+    public String get() {
+        return this.input;
     }
 
     public List<String> getFollowingMessages() {

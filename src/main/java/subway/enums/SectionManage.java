@@ -16,7 +16,7 @@ public enum SectionManage {
             OutputView.print("[INFO] 구간이 삭제되었습니다.");
         }
     },
-    BACK("돌아가기", List.of(), "B") {
+    BACK("B. 돌아가기", List.of(), "B") {
         public void printInfo(String...value) {
             OutputView.print("[INFO] 이전 메뉴로 돌아갑니다.");
         }
@@ -35,13 +35,17 @@ public enum SectionManage {
     public static String getWholeMenu() {
         StringBuilder stringBuilder = new StringBuilder();
         for (SectionManage menu : SectionManage.values()) {
-            stringBuilder.append(menu.get() + "\n");
+            stringBuilder.append(menu.getPrinting() + "\n");
         }
         return stringBuilder.toString();
     }
 
-    private String get() {
+    private String getPrinting() {
         return this.printing;
+    }
+
+    private String get() {
+        return this.input;
     }
 
     abstract public void printInfo(String...value);

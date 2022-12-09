@@ -59,11 +59,11 @@ public class LineController {
 
     private static void runFirstMenu() {
         List<String> followingMessages = LineManage.FIRST.getFollowingMessages();
-        OutputView.print(followingMessages.remove(0));
+        OutputView.print(followingMessages.get(0));
         String newLine = InputView.read();
-        OutputView.print(followingMessages.remove(0));
+        OutputView.print(followingMessages.get(1));
         String up = InputView.read();
-        OutputView.print(followingMessages.remove(0));
+        OutputView.print(followingMessages.get(2));
         String down = InputView.read();
         makeLine(newLine, StationMaker.make(up), StationMaker.make(down));
     }
