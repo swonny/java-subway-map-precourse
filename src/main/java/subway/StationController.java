@@ -33,7 +33,7 @@ public class StationController {
     }
 
     private static void deleteStation() {
-        List<String> followingMessages = StationManage.FIRST.getFollowingMessages();
+        List<String> followingMessages = StationManage.SECOND.getFollowingMessages();
         OutputView.print(followingMessages.get(0));
         StationRepository.deleteStation(InputView.read());
         StationManage.SECOND.printInfo();

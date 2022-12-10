@@ -47,11 +47,14 @@ public class StationRepository {
                 return station;
             }
         }
-        return null;
+        throw new IllegalArgumentException("[ERROR] 해당하는 역이 존재하지 않습니다.");
     }
 
     public static boolean has(String name) {
-        return stations().contains(get(name));
+        try {
+            return stations().contains(StationRepository.get(name));
+        } catch (IllegalArgumentException exception) {
+            return false;
+        }
     }
-
 }

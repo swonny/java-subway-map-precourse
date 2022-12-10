@@ -3,6 +3,8 @@ package subway.domain;
 import java.util.*;
 
 public class SectionRepository {
+    private static final int MINIMUM_STATIONS_PER_LINE = 2;
+
     private static LinkedHashMap<Line, List<Station>> totalSubway = new LinkedHashMap<>();
 
     public static LinkedHashMap<Line, List<Station>> sections() {
@@ -26,16 +28,15 @@ public class SectionRepository {
 
     public static void addStationToSection(Line line, Station station, int order) {
         List<Station> stations = totalSubway.get(line);
-        stations.add(order, station);
+        stations.add(order - 1, station);
         totalSubway.put(line, stations);
     }
 
-    public static void delete(Line line, Station station) {
-        totalSubway.containsValue(station);
-        List<Station> stations = totalSubway.get(line);
-        if (stations.size() < 2) {
-            throw new IllegalArgumentException();
+    public static void deleteSection(Line line, Station station) {
+        if (hasLessThanTwoStations(line)) {
+            throw new IllegalArgumentException("[ERROR] 해당 노선에 역이 두 개 이하이기 때문에 삭제할 수 없습니다.");
         }
+        List<Station> stations = totalSubway.get(line);
         stations.remove(stations.indexOf(station));
     }
 
@@ -54,5 +55,10 @@ public class SectionRepository {
             }
         }
         return false;
+    }
+
+    public static boolean hasLessThanTwoStations(Line line) {
+        System.out.println(totalSubway.get(line).size());
+        return totalSubway.get(line).size() <= MINIMUM_STATIONS_PER_LINE;
     }
 }

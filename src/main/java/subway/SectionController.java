@@ -25,9 +25,9 @@ public class SectionController {
 
     private static void runSecondMenu() {
         List<String> followingMessages = SectionManage.SECOND.getFollowingMessages();
-        OutputView.print(followingMessages.remove(0));
+        OutputView.print(followingMessages.get(0));
         String lineName = InputView.read();
-        OutputView.print(followingMessages.remove(0));
+        OutputView.print(followingMessages.get(0));
         String stationName = InputView.read();
         deleteStationInSection(lineName, stationName);
     }
@@ -43,15 +43,19 @@ public class SectionController {
         addSection(newLine, station, Integer.valueOf(order));
     }
 
-    public static void addSection(String lineName, String station, int stationOrder) {
+    public static void addSection(String lineName, String stationName, int stationOrder) {
+        if (!StationRepository.has(stationName)) {
+            Station station = StationMaker.make(stationName);
+            StationRepository.addStation(station);
+        }
         SectionRepository.addStationToSection(
                 LineRepository.get(lineName),
-                StationRepository.get(station),
+                StationRepository.get(stationName),
                 stationOrder
         );
     }
 
     public static void deleteStationInSection(String lineName, String stationName) {
-        SectionRepository.delete(LineRepository.get(lineName), StationRepository.get(stationName));
+        SectionRepository.deleteSection(LineRepository.get(lineName), StationRepository.get(stationName));
     }
 }
