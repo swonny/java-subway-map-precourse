@@ -34,11 +34,11 @@ public class SectionController {
 
     private static void runFirstMenu() {
         List<String> followingMessages = SectionManage.FIRST.getFollowingMessages();
-        OutputView.print(followingMessages.remove(0));
+        OutputView.print(followingMessages.get(0));
         String newLine = InputView.read();
-        OutputView.print(followingMessages.remove(0));
+        OutputView.print(followingMessages.get(1));
         String station = InputView.read();
-        OutputView.print(followingMessages.remove(0));
+        OutputView.print(followingMessages.get(2));
         String order = InputView.read();
         addSection(newLine, station, Integer.valueOf(order));
     }
@@ -54,5 +54,4 @@ public class SectionController {
     public static void deleteStationInSection(String lineName, String stationName) {
         SectionRepository.delete(LineRepository.get(lineName), StationRepository.get(stationName));
     }
-
 }

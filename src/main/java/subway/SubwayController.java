@@ -9,38 +9,53 @@ import subway.enums.StationManage;
 import view.InputView;
 import view.OutputView;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class SubwayController {
-    private final String BACK = "B";
-
-    public void startService() {
-        initializeSetting();
+    public void startService(Initializer initializer) {
+        initializer.init();
         selectMainMenu();
     }
 
     private void selectMainMenu() {
-        String selectedMenu;
+        String selectedMenu = "";
         do {
-            OutputView.print(MainMenu.getWholeMenu());
-            selectedMenu = InputView.readMainMenuSelection();
-            runMainMenu(selectedMenu);
+            try {
+                OutputView.print(MainMenu.getWholeMenu());
+                selectedMenu = InputView.readMainMenuSelection();
+                runMainMenu(selectedMenu);
+            } catch (IllegalArgumentException exception) {
+                OutputView.print(exception.getMessage());
+            }
         } while (!MainMenu.willQuit(selectedMenu));
-
     }
 
     private void runMainMenu(String selectedMenu) {
         if (MainMenu.isFirstOption(selectedMenu)) {
-            startManagingStation();
+            try {
+                startManagingStation();
+            } catch (IllegalArgumentException exception) {
+                OutputView.print(exception.getMessage());
+                startManagingStation();
+            }
         }
         if (MainMenu.isSecondOption(selectedMenu)) {
-            startManagingLine();
+            try {
+                startManagingLine();
+            } catch (IllegalArgumentException exception) {
+                OutputView.print(exception.getMessage());
+                startManagingLine();
+            }
         }
         if (MainMenu.isThirdOption(selectedMenu)) {
-            startManagingSection();
+            try {
+                startManagingSection();
+            } catch (IllegalArgumentException exception) {
+                OutputView.print(exception.getMessage());
+                startManagingSection();
+            }
         }
         if (MainMenu.isFourthOption(selectedMenu)) {
             printTotalSubway();
@@ -81,27 +96,5 @@ public class SubwayController {
         OutputView.print(LineManage.getWholeMenu());
         String selectedMenu = InputView.read();
         LineController.runMenu(selectedMenu);
-    }
-
-    private void initializeSetting() {
-        HashMap<String, List<String>> initializedValues = Stations.getStations();
-        for (String lineName : initializedValues.keySet()) {
-            Line newLine = LineController.makeLine(lineName);
-            initializeStations(initializedValues.get(lineName));
-            initializeSections(newLine, initializedValues.get(lineName));
-        }
-    }
-
-    private void initializeStations(List<String> stations) {
-        stations.stream()
-                .filter(station -> !StationRepository.has(station))
-                .map(StationMaker::make)
-                .forEach(StationRepository::addStation);
-    }
-
-    private void initializeSections(Line line, List<String> stations) {
-        SectionRepository.initializeSections(line, stations.stream()
-                .map(StationController::getStation)
-                .collect(Collectors.toList()));
     }
 }

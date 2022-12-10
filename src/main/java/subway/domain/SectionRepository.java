@@ -46,4 +46,13 @@ public class SectionRepository {
     public static Map<Line, List<Station>> getLinesWithStations() {
         return Collections.unmodifiableMap(totalSubway);
     }
+
+    public static boolean has(Station station) {
+        for (Line line : totalSubway.keySet()) {
+            if (totalSubway.get(line).contains(station)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -16,7 +16,7 @@ class SubwayControllerTest {
     @Test
     public void testSubwayController() {
         SubwayController subwayController = new SubwayController();
-        subwayController.startService();
+        subwayController.startService(new Initializer());
         Map<Line, List<Station>> map = SectionRepository.getLinesWithStations();
         for (Line line : map.keySet()) {
             System.out.println(line.getName());

@@ -1,12 +1,9 @@
 package subway.enums;
 
-import subway.domain.Station;
-import subway.domain.StationMaker;
 import view.OutputView;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 public enum StationManage {
     FIRST("1. 역 등록", List.of("## 등록할 역 이름을 입력하세요."), "1") {
@@ -32,13 +29,13 @@ public enum StationManage {
 
     private String printing;
     private List<String> followingMessages;
-    private String input;
+    private String userInput;
     abstract public void printInfo(String...value);
 
     StationManage(String printing, List<String> followingMessages, String input) {
         this.printing = printing;
         this.followingMessages = followingMessages;
-        this.input = input;
+        this.userInput = input;
     }
 
     public static String getWholeMenu() {
@@ -54,13 +51,14 @@ public enum StationManage {
     }
 
     public String get() {
-        return this.input;
+        return this.userInput;
     }
 
     public List<String> getFollowingMessages() {
         return this.followingMessages;
     }
 
-    public void printInfo(Station station) {
+    public boolean equals(String userInput) {
+        return this.userInput.equals(userInput);
     }
 }

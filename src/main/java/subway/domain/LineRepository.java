@@ -16,7 +16,19 @@ public class LineRepository {
     }
 
     public static void addLine(Line line) {
+        if (has(line)) {
+            throw new IllegalArgumentException("[ERROR] 이미 존재하는 노선입니다.");
+        }
         lines.add(line);
+    }
+
+    private static boolean has(Line line) {
+        try {
+            get(line.getName());
+        } catch (IllegalArgumentException exception) {
+            return false;
+        }
+        return true;
     }
 
     public static boolean deleteLineByName(String name) {
@@ -29,7 +41,6 @@ public class LineRepository {
                 return line;
             }
         }
-        // TODO: return null 바꿔보기
-        return null;
+        throw new IllegalArgumentException("[ERROR] 존재하지 않는 노선입니다.");
     }
 }
