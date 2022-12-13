@@ -7,16 +7,12 @@ import view.InputView;
 import view.OutputView;
 
 public class SectionController {
-    public static void run() {
-        selectMenu();
-    }
-
-    private static void selectMenu() {
+    public static void selectMenu() {
         try {
             runMenu(InputView.selectSectionMenu());
         } catch (IllegalArgumentException exception) {
             OutputView.print(exception.getMessage());
-            run();
+            selectMenu();
         }
     }
 

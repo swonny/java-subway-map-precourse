@@ -12,20 +12,19 @@ import view.OutputView;
 import java.util.stream.Collectors;
 
 public class StationController {
-    public static void run() {
-        selectMenu();
-    }
-
-    private static void selectMenu() {
+    public static void selectMenu() {
         try {
             select(InputView.selectStationMenu());
         } catch (IllegalArgumentException exception) {
             OutputView.print(exception.getMessage());
-            run();
+            selectMenu();
         }
     }
 
     private static void select(String selection) {
+        if (StationMenu.BACK.getUserInput().equals(selection)) {
+            return;
+        }
         if (StationMenu.FIRST.getUserInput().equals(selection)) {
             addStation();
         }
@@ -34,9 +33,6 @@ public class StationController {
         }
         if (StationMenu.THIRD.getUserInput().equals(selection)) {
             printStations();
-        }
-        if (StationMenu.BACK.getUserInput().equals(selection)) {
-            goBackToMain();
         }
     }
 

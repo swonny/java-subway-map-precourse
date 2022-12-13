@@ -31,13 +31,13 @@ public class MainController {
 
     private static boolean runMenu(String selection) {
         if (MainMenu.FIRST.getUserInput().equals(selection)) {
-            StationController.run();
+            StationController.selectMenu();
         }
         if (MainMenu.SECOND.getUserInput().equals(selection)) {
-            LineController.run();
+            LineController.selectMenu();
         }
         if (MainMenu.THIRD.getUserInput().equals(selection)) {
-            SectionController.run();
+            SectionController.selectMenu();
         }
         if (MainMenu.FOURTH.getUserInput().equals(selection)) {
             SubwayPrintController.run();

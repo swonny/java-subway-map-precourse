@@ -15,20 +15,19 @@ public class LineController {
     private static final int UP_STATION = SECOND_FOLLOWING_MESSAGE;
     private static final int DOWN_STATION = THIRD_FOLLOWING_MESSAGE;
 
-    public static void run() {
-        selectMenu();
-    }
-
-    private static void selectMenu() {
+    public static void selectMenu() {
         try {
             runMenu(InputView.selectLineMenu());
         } catch (IllegalArgumentException exception) {
             OutputView.print(exception.getMessage());
-            run();
+            selectMenu();
         }
     }
 
     private static void runMenu(String selection) {
+        if (LineMenu.BACK.getUserInput().equals(selection)) {
+            return;
+        }
         if (LineMenu.FIRST.getUserInput().equals(selection)) {
             registerLine();
         }
@@ -37,9 +36,6 @@ public class LineController {
         }
         if (LineMenu.THIRD.getUserInput().equals(selection)) {
             printLines();
-        }
-        if (LineMenu.BACK.getUserInput().equals(selection)) {
-            MainController.run();
         }
     }
 

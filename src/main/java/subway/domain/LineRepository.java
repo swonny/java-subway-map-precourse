@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class LineRepository {
     private static final List<Line> lines = new ArrayList<>();
@@ -23,12 +24,12 @@ public class LineRepository {
     }
 
     public static Line getLineByName(String lineName) {
-        for (Line line : lines) {
-            if (line.getName().equals(lineName)) {
-                return line;
-            }
-        }
-        throw new IllegalArgumentException(ExceptionMessage.LINE_DOES_NOT_EXIST.toString());
+        return lines.stream()
+                .filter(line -> line.getName().equals(lineName))
+                .findFirst()
+                .orElseThrow(() ->
+                        new IllegalArgumentException(ExceptionMessage.LINE_DOES_NOT_EXIST.toString())
+                );
     }
 
     public static boolean has(String lineName) {

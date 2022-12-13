@@ -13,6 +13,12 @@ class LineRepositoryTest {
     }
 
     @Test
+    public void testGet_예외발생() {
+        Initializer.init();
+        System.out.println(LineRepository.getLineByName("5호선"));
+    }
+
+    @Test
     public void testListStream() {
         List<Integer> str = new ArrayList<>();
         str.add(1);
