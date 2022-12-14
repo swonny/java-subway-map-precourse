@@ -82,4 +82,9 @@ public class InputView {
         OutputView.printReadingLineMenu();
         return read();
     }
+
+    public static String readSectionMenu() {
+        OutputView.printReadingSectionMenu();
+        return read();
+    }
 }

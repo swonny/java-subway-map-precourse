@@ -23,5 +23,9 @@ public class ViewMessage {
     public static final String DELETING_LINE_OF_SECTION = "## 삭제할 구간의 노선을 입력하세요.";
     public static final String DELETING_STATION_OF_SECTION = "## 삭제할 구간의 역을 입력하세요.";
     public static final String LINE_MENU_TITLE = "## 노선 관리 화면";
+    public static final String SECTION_MENU_TITLE = "## 구간 관리 화면";
+    public static final String SUBWAY_VIEW_TITLE = "## 지하철 노선도";
+    public static final String SUBWAY_VIEW_DELIMITER = "---";
+
 
 }

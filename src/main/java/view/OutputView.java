@@ -2,6 +2,7 @@ package view;
 
 import constant.LineMenu;
 import constant.MainMenu;
+import constant.SectionMenu;
 import constant.StationMenu;
 import subway.domain.Line;
 import subway.domain.Station;
@@ -145,5 +146,26 @@ public class OutputView {
         print(LineMenu.getWholeMenu());
         printNewLine();
         print(SELECT_MENU);
+    }
+
+    public static void printReadingSectionMenu() {
+        printNewLine();
+        print(SECTION_MENU_TITLE);
+        print(SectionMenu.getWholeMenu());
+        printNewLine();
+        print(SELECT_MENU);
+    }
+
+    public static void printAllSubway(List<Line> lines) {
+        printNewLine();
+        print(SUBWAY_VIEW_TITLE);
+        for (Line line : lines) {
+            printInfo(line.getName());
+            print(SUBWAY_VIEW_DELIMITER);
+            line.getStations().stream()
+                    .map(station -> station.getName())
+                    .forEach(stationName -> printInfo(stationName));
+            printNewLine();
+        }
     }
 }

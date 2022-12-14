@@ -1,6 +1,7 @@
 package subway.controller;
 
 import constant.MainMenu;
+import subway.domain.SubwayInformationService;
 import view.InputView;
 import view.OutputView;
 
@@ -10,11 +11,13 @@ public class MainController {
     private StationController stationController;
     private LineController lineController;
     private SectionController sectionController;
+    private SubwayInformationService subwayInformationService;
 
     public MainController(Scanner scanner) {
         this.stationController = new StationController();
         this.lineController = new LineController();
         this.sectionController = new SectionController();
+        this.subwayInformationService = new SubwayInformationService();
     }
 
     public void run() {
@@ -34,6 +37,9 @@ public class MainController {
         }
         if (MainMenu.THIRD.equals(selection)) {
             sectionController.run();
+        }
+        if (MainMenu.FOURTH.equals(selection)) {
+            subwayInformationService.run();
         }
         run();
     }

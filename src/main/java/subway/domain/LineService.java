@@ -48,6 +48,7 @@ public class LineService {
     }
 
     public void deleteSection(String deletingLineName, String deletingStationName) {
+        // TODO :뭔가 잘못됐음
         Line line = LineRepository.getLineByName(deletingLineName);
         Station station = StationRepository.getStationByName(deletingStationName);
         if (line.isDeletable()) {

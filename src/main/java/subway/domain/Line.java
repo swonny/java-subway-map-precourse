@@ -1,6 +1,7 @@
 package subway.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -59,5 +60,9 @@ public class Line {
 
     public boolean isDeletable() {
         return stations.size() > MINIMUM_NUMBER_OF_STATIONS;
+    }
+
+    public List<Station> getStations() {
+        return Collections.unmodifiableList(stations);
     }
 }

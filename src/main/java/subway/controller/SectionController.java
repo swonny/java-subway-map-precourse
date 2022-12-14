@@ -13,7 +13,7 @@ public class SectionController {
     }
 
     public void run() {
-        SectionMenu selection = getSectionMenu(InputView.readStationMenu());
+        SectionMenu selection = getSectionMenu(InputView.readSectionMenu());
         select(selection);
     }
 
