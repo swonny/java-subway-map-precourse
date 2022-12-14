@@ -19,26 +19,24 @@ public class LineController {
     }
 
     public void run() {
-        LineMenu selection = getLineMenu(InputView.readStationMenu());
+        LineMenu selection = getLineMenu(InputView.readLineMenu());
         select(selection);
     }
 
     private void select(LineMenu selection) {
-        // TODO : 예외 처리 해주기
         if (LineMenu.BACK.equals(selection)) {
             return;
         }
         if (LineMenu.FIRST.equals(selection)) {
             addLine();
-            OutputView.printFinishedAddingLine();
         }
         if (LineMenu.SECOND.equals(selection)) {
             deleteLine(InputView.readDeletingLine());
-            OutputView.printFinishedDeletingLine();
         }
         if (LineMenu.THIRD.equals(selection)) {
             printLines();
         }
+        run();
     }
 
     private void printLines() {
@@ -52,6 +50,7 @@ public class LineController {
     private void deleteLine(String deletingLine) {
         try {
             lineService.deleteLine(deletingLine);
+            OutputView.printFinishedDeletingLine();
         } catch (IllegalArgumentException exception) {
             OutputView.printExceptionMessage(exception);
         }
@@ -59,10 +58,12 @@ public class LineController {
 
     private void addLine() {
         try {
+            // TODO : line도 String으로 넘겨줘야할듯
             Line line = new Line(InputView.readAddingLine());
-            Station startStation = new Station(InputView.readStartStation());
-            Station endStation = new Station(InputView.readEndStation());
+            String startStation = InputView.readStartStation();
+            String endStation = InputView.readEndStation();
             lineService.addLine(line, startStation, endStation);
+            OutputView.printFinishedAddingLine();
         } catch (IllegalArgumentException exception) {
             OutputView.printExceptionMessage(exception);
         }

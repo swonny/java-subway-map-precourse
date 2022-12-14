@@ -22,6 +22,6 @@ public class ViewMessage {
     public static final String FINISHED_ADDING_SECTION = "구간이 등록되었습니다.";
     public static final String DELETING_LINE_OF_SECTION = "## 삭제할 구간의 노선을 입력하세요.";
     public static final String DELETING_STATION_OF_SECTION = "## 삭제할 구간의 역을 입력하세요.";
-
+    public static final String LINE_MENU_TITLE = "## 노선 관리 화면";
 
 }

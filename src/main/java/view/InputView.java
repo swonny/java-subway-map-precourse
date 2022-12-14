@@ -77,4 +77,9 @@ public class InputView {
         OutputView.printDeletingStationOfSection();
         return read();
     }
+
+    public static String readLineMenu() {
+        OutputView.printReadingLineMenu();
+        return read();
+    }
 }

@@ -1,5 +1,6 @@
 package view;
 
+import constant.LineMenu;
 import constant.MainMenu;
 import constant.StationMenu;
 import subway.domain.Line;
@@ -136,5 +137,13 @@ public class OutputView {
     public static void printDeletingStationOfSection() {
         printNewLine();
         print(DELETING_STATION_OF_SECTION);
+    }
+
+    public static void printReadingLineMenu() {
+        printNewLine();
+        print(LINE_MENU_TITLE);
+        print(LineMenu.getWholeMenu());
+        printNewLine();
+        print(SELECT_MENU);
     }
 }

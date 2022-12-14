@@ -23,4 +23,13 @@ public class LineRepository {
     public static Line getLineByName(String readLineName) {
         return null;
     }
+
+    public static boolean has(Line newLine) {
+        return lines.stream()
+                .anyMatch(line -> line.equals(newLine));
+    }
+
+    public static boolean isEmpty() {
+        return lines.isEmpty();
+    }
 }
