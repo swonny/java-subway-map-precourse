@@ -65,4 +65,8 @@ public class Line {
     public List<Station> getStations() {
         return Collections.unmodifiableList(stations);
     }
+
+    public void initializeStations(List<Station> initStations) {
+        this.stations.addAll(initStations);
+    }
 }

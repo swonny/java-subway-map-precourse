@@ -2,6 +2,7 @@ package subway.controller;
 
 import constant.MainMenu;
 import subway.domain.SubwayInformationService;
+import subway.domain.SubwayInitializer;
 import view.InputView;
 import view.OutputView;
 
@@ -13,11 +14,12 @@ public class MainController {
     private SectionController sectionController;
     private SubwayInformationService subwayInformationService;
 
-    public MainController(Scanner scanner) {
+    public MainController(Scanner scanner, SubwayInitializer subwayInitializer) {
         this.stationController = new StationController();
         this.lineController = new LineController();
         this.sectionController = new SectionController();
         this.subwayInformationService = new SubwayInformationService();
+        subwayInitializer.init();
     }
 
     public void run() {
