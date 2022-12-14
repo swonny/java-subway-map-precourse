@@ -24,19 +24,18 @@ public class SectionController {
         }
         if (SectionMenu.FIRST.equals(selection)) {
             addSection();
-            OutputView.printFinishedAddingSection();
         }
         if (SectionMenu.SECOND.equals(selection)) {
             deleteSection();
-            OutputView.printFinishedDeletingLine();
         }
     }
 
     private void deleteSection() {
         try {
-            Line deletingLine = LineRepository.getLineByName(InputView.readDeletingLineOfSection());
-            Station deletingStation = StationRepository.getStationByName(InputView.readDeletingStationOfSection());
+            String deletingLine = InputView.readDeletingLineOfSection();
+            String deletingStation = InputView.readDeletingStationOfSection();
             lineService.deleteSection(deletingLine, deletingStation);
+            OutputView.printFinishedDeletingLine();
         } catch (IllegalArgumentException exception) {
             OutputView.printExceptionMessage(exception);
         }
@@ -44,10 +43,11 @@ public class SectionController {
 
     private void addSection() {
         try {
-            Line lineName = LineRepository.getLineByName(InputView.readLineName());
-            Station stationName = getStation(InputView.readStationName());
+            String lineName = InputView.readLineName();
+            String stationName = InputView.readStationName();
             int order = getOrder(InputView.getOrder());
             lineService.addSection(lineName, stationName, order);
+            OutputView.printFinishedAddingSection();
         } catch (IllegalArgumentException exception) {
             OutputView.printExceptionMessage(exception);
         }

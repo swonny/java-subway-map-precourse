@@ -21,7 +21,10 @@ public class LineRepository {
     }
 
     public static Line getLineByName(String readLineName) {
-        return null;
+        return lines.stream()
+                .filter(line -> line.getName().equals(readLineName))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("등록된 노선이 없습니다."));
     }
 
     public static boolean has(Line newLine) {

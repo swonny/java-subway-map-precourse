@@ -24,7 +24,10 @@ public class LineService {
         try {
             return StationRepository.getStationByName(stationName);
         } catch (IllegalArgumentException exception) {
-            return new Station(stationName);
+            // TODO : station maker가 만들어서 객체 반환 & 레포 등록하도록 변경
+            Station station =  new Station(stationName);
+            StationRepository.addStation(station);
+            return station;
         }
     }
 
@@ -35,11 +38,21 @@ public class LineService {
         return LineRepository.lines();
     }
 
-    public void addSection(Line lineName, Station stationName, int order) {
-
+    public void addSection(String lineName, String stationName, int order) {
+        Line line = LineRepository.getLineByName(lineName);
+        Station station = getStation(stationName);
+        if (line.has(station)) {
+            throw new IllegalArgumentException("이미 노선에 존재하는 역입니다.");
+        }
+        line.add(station, order - 1);
     }
 
-    public void deleteSection(Line deletingLine, Station deletingStation) {
-
+    public void deleteSection(String deletingLineName, String deletingStationName) {
+        Line line = LineRepository.getLineByName(deletingLineName);
+        Station station = StationRepository.getStationByName(deletingStationName);
+        if (line.isDeletable()) {
+            line.deleteStation(station);
+        }
+        throw new IllegalArgumentException("한 노선에는 최소 두 개 이상의 역이 존재해야 합니다.");
     }
 }

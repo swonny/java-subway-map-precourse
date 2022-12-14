@@ -21,7 +21,10 @@ public class StationRepository {
     }
 
     public static Station getStationByName(String stationName) {
-        return null;
+        return stations.stream()
+                .filter(station -> station.getName().equals(stationName))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("찾는 역이 없습니다."));
     }
 
     public static boolean has(Station addingStation) {

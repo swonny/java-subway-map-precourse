@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class Line {
     private static final int MINIMUM_SIZE = 2;
+    private static final int MINIMUM_NUMBER_OF_STATIONS = 2;
     private String name;
     private List<Station> stations;
 
@@ -13,6 +14,13 @@ public class Line {
         validate(name);
         this.name = name;
         this.stations = new ArrayList<>();
+    }
+
+    public void add(Station station, int orderIndex) {
+        if (stations.size() - 1 < orderIndex) {
+            throw new IllegalArgumentException("입력할 수 있는 범위는 1 ~ " + stations.size() + "까지입니다.");
+        }
+        stations.add(station);
     }
 
     private void validate(String name) {
@@ -30,6 +38,10 @@ public class Line {
         this.stations.add(endStation);
     }
 
+    public boolean has(Station station) {
+        return this.stations.contains(station);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -38,4 +50,14 @@ public class Line {
         return Objects.equals(name, line.name);
     }
 
+    public void deleteStation(Station station) {
+        if (stations.contains(station)) {
+            stations.remove(station);
+        }
+        throw new IllegalArgumentException("구간에 존재하지 않는 역입니다.");
+    }
+
+    public boolean isDeletable() {
+        return stations.size() > MINIMUM_NUMBER_OF_STATIONS;
+    }
 }
