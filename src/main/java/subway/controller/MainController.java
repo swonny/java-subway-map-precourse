@@ -35,6 +35,7 @@ public class MainController {
         if (MainMenu.THIRD.equals(selection)) {
             sectionController.run();
         }
+        run();
     }
 
     private MainMenu getMainMenuSelection(String input) {

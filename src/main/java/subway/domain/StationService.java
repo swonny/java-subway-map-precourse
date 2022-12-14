@@ -4,19 +4,16 @@ import java.util.List;
 
 public class StationService {
     public void addStation(String addingStation) {
-        // TODO : 새로운 역 객체 추가
+        Station newStation = new Station(addingStation);
+        if (StationRepository.has(newStation)) {
+            throw new IllegalArgumentException("이미 등록된 역 이름입니다. ");
+        }
+        StationRepository.addStation(newStation);
     }
 
     public void deleteStation(String deletingStation) {
-
-    }
-
-    public void searchStation() {
-
-    }
-
-    public List<Station> getStations() {
-        // TODO : 객체 반환 <- 레포지토리에서 받아도 될듯
-        return null;
+        if (!StationRepository.deleteStation(deletingStation)) {
+            throw new IllegalArgumentException("등록된 지하철 역이 없습니다.");
+        }
     }
 }

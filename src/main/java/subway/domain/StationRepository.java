@@ -23,4 +23,9 @@ public class StationRepository {
     public static Station getStationByName(String stationName) {
         return null;
     }
+
+    public static boolean has(Station addingStation) {
+        return stations.stream()
+                .anyMatch(station -> station.equals(addingStation));
+    }
 }

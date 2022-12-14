@@ -1,9 +1,13 @@
 package subway.controller;
 
 import constant.StationMenu;
+import subway.domain.Station;
+import subway.domain.StationRepository;
 import subway.domain.StationService;
 import view.InputView;
 import view.OutputView;
+
+import java.util.List;
 
 public class StationController {
     StationService stationService;
@@ -18,26 +22,25 @@ public class StationController {
     }
 
     private void select(StationMenu selection) {
-        // TODO : 예외 처리 해주기
         if (StationMenu.BACK.equals(selection)) {
             return;
         }
         if (StationMenu.FIRST.equals(selection)) {
             addStation(InputView.readAddingStation());
-            OutputView.printFinishedAddingStation();
         }
         if (StationMenu.SECOND.equals(selection)) {
             deleteStation(InputView.readDeletingStation());
-            OutputView.printFinishedDeletingStation();
         }
         if (StationMenu.THIRD.equals(selection)) {
-            printLines();
+            printStations();
         }
+        run();
     }
 
-    private void printLines() {
+    private void printStations() {
         try {
-            OutputView.printStations(stationService.getStations());
+            List<Station> stations = StationRepository.stations();
+            OutputView.printStations(stations);
         } catch (IllegalArgumentException exception) {
             OutputView.printExceptionMessage(exception);
         }
@@ -46,6 +49,7 @@ public class StationController {
     private void addStation(String addingStation) {
         try {
             stationService.addStation(addingStation);
+            OutputView.printFinishedAddingStation();
         } catch (IllegalArgumentException exception) {
             OutputView.printExceptionMessage(exception);
         }
@@ -54,6 +58,7 @@ public class StationController {
     private void deleteStation(String deletingStation) {
         try {
             stationService.deleteStation(deletingStation);
+            OutputView.printFinishedDeletingStation();
         } catch (IllegalArgumentException exception) {
             OutputView.printExceptionMessage(exception);
         }
